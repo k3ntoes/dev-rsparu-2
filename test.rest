@@ -1,0 +1,4 @@
+GET http://localhost:8080/API/Kelompok/
+
+Content-Type: application/json
+#x-token: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODA4MFwvIiwiYXVkIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwODBcLyIsImlkIjoiMSIsInVzZXJuYW1hZSI6Imxva2V0IiwiaWF0IjoxNjMxNjc1Nzc2LCJuYmYiOjE2MzE2NzU3NzYsImV4cCI6MTYzMTY4Mjk3Nn0.KirERSsNqPaX7YXnFkFUZv-yU7shGbLoahXNdHpM6zU

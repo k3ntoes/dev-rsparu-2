@@ -1,0 +1,167 @@
+import { generateYmd } from "../core/srcUmur.js"
+
+const host = "http://192.168.10.68"
+const port = 2000
+const room = 'loket'
+const apiUri = `${host}:${port}`
+const socket = io.connect(`${host}:${port}/socket`);
+
+
+let today = () => {
+    return new Date().toISOString().slice(0, 10)
+}
+
+let do_post = () => {
+    if ($.fn.DataTable.isDataTable('#tbl')) {
+        $('#tbl').DataTable().destroy()
+    }
+
+    var str = "";
+
+    $.post(`${apiUri}/Kiosk/listAntrean`, { tanggal: today() }, (json) => {
+        if (json.metadata.code === 204) {
+            str = ""
+            $('#tbl tbody').html(str);
+            $('#tbl').dataTable();
+            return
+        }
+        $.each(json.response.rows, (i, t) => {
+            // var jPanggil = `'${t.antrean.no_antrean}', '${t.antrean.tanggal_antrean}'`
+
+            var jPanggil = JSON.stringify({
+                uuid: t.uuid,
+                noantrean: t.urut,
+                tanggal_antrean: generateYmd(t.ts)
+            })
+
+            var kdPanggil = 0
+            var warna = ""
+            if (t.kdStat == 1) {
+                kdPanggil = t.kdStat
+                warna = "success"
+            }
+            if (t.kdStat === 3) warna = "danger"
+
+            str += `<tr class="${warna}">` +
+                "<td>" + t.urut + "</td>" +
+                "<td>" + t.jenis + "</td>" +
+                "<td>" + t.stat + "</td>" +
+                "<td>" + kdPanggil + "</td>" +
+                `<td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                        <button type="button" class="btn btn-primary" id="panggil" onclick='panggil(${jPanggil})' data-dismiss="modal" >PANGGIL</button>
+                    </div>
+                </td>` +
+                "</tr>";
+        });
+
+        $('#tbl tbody').html(str);
+        setTimeout(() => {
+            $('#tbl').DataTable(
+                {
+                    searching: false,
+                    order: [[3, "desc"]]
+                }
+            )
+        }, 1000)
+    }, "json")
+}
+
+let panggil = (data) => {
+    $('#nourut').val(data.noantrean)
+    $('#uuid').val(data.uuid)
+    // $.post(`${apiUri}/PanggilAntrean`, data, (json) => {
+    //     console.log(json)
+    //     do_post()
+    // })
+}
+
+let lewati = (data) => {
+    $.post(`${apiUri}/LewatiAntrean`, data, (json) => {
+        do_post()
+    })
+}
+
+let verif = (data) => {
+    $.post(`${apiUri}/VerifAntrean`, data, (json) => {
+        do_post()
+    })
+}
+
+let panggilAction = () => {
+    const req = {
+        room: 'loket',
+        tanggal: today()
+    }
+
+    socket.emit('get-antrian-loket', req)
+}
+
+$('#panggilBtn').on('click', () => {
+    const req = {
+        room: room,
+        tanggal: today()
+    }
+
+    socket.emit('get-antrian-loket', req)
+})
+
+let pageInit = () => {
+    socket.emit('joinRoom', room)
+    socket.on('success', res => { console.log(res) })
+
+}
+
+
+
+$(document).ready(() => {
+    socket.on('do-panggil', res => {
+        if (res.metadata.code === 200) {
+            let str = ""
+            const rows = res.response.rows
+            $.each(rows, (i, t) => {
+                // var jPanggil = `'${t.antrean.no_antrean}', '${t.antrean.tanggal_antrean}'`
+
+                var jPanggil = JSON.stringify({
+                    uuid: t.uuid,
+                    noantrean: t.urut,
+                    tanggal_antrean: generateYmd(t.ts)
+                })
+
+                var kdPanggil = 0
+                var warna = ""
+                if (t.kdStat == 1) {
+                    kdPanggil = t.kdStat
+                    warna = "success"
+                }
+                if (t.kdStat === 3) warna = "danger"
+
+                str += `<tr class="${warna}">` +
+                    `<td>${t.urut}</td>` +
+                    `<td>${t.jenis}</td>` +
+                    `<td>${t.loket}</td>` +
+                    `<td>${kdPanggil}</td>` +
+                    `<td>${t.stat}</td>` +
+                    `<td>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <button type="button" class="btn btn-primary" id="panggil" onclick='panggil(${jPanggil})' data-dismiss="modal" >PANGGIL</button>
+                        </div>
+                    </td>` +
+                    "</tr>";
+            });
+
+            $('#tbl tbody').html(str);
+            if ($.fn.DataTable.isDataTable('#tbl')) $('#tbl').DataTable().destroy()
+            setTimeout(() => {
+                $('#tbl').DataTable(
+                    {
+                        searching: false,
+                        order: [[3, "desc"]]
+                    }
+                )
+            }, 1000)
+        }
+    })
+})
+
+pageInit()
