@@ -5,6 +5,7 @@ const tgl = $('#tgl')
 const Module = {
     init: async () => {
         $('#cariDaftarTunggu').on('click', Module.action.cari)
+        await Module.action.cari()
     },
     action: {
         cari: async () => {
@@ -19,6 +20,36 @@ const Module = {
             const res1 = await res.json()
 
             return Module.tableGenerator(res1.response.data)
+        },
+        detPasien: async norm => {
+            NProgress.start()
+            const formData = {
+                frmlama: norm
+            }
+            const req = {
+                uri: `${C.base_uri}/API/Pasien/form/cari`,
+                method: 'POST',
+                token: C.token,
+                formData: formData
+            }
+
+            const res = await R.requestGenerator(req)
+            const res1 = await res.json()
+
+            return res1
+        },
+        kunjungan: async notrans => {
+            NProgress.start()
+            const req = {
+                uri: `${C.base_uri}/API/Kunjungan/${notrans}`,
+                method: 'GET',
+                token: C.token
+            }
+
+            const res = await R.requestGenerator(req)
+            const res1 = await res.json()
+
+            return res1
         }
     },
     tableGenerator: async data => {
@@ -88,7 +119,30 @@ const Module = {
             selesai: selesai,
             countSelesai: selesai.length
         }
+    },
+    setForm: {
+        biodata: (pasien, kunj) => {
+            $('#nama').html(pasien.nama)
+        }
     }
 }
 
 export { Module as daftar_tunggu_tensi }
+
+
+let doEdit = async id => {
+    const resKunj = await Module.action.kunjungan(id)
+    if (resKunj.metaData.code !== 200) return alert(resKunj.response.message)
+    const dataKunj = resKunj.response.data
+    const pasien = await Module.action.detPasien(dataKunj.norm)
+    const dataPasien = pasien.response.data[0]
+
+    NProgress.done()
+}
+
+// Button Event
+$('#listDaftarTunggu tbody').on('click', 'span.btn', async e => {
+    const aksi = e.target.dataset.action
+    const id = e.target.dataset.notrans
+    if (aksi === 'edit') return doEdit(id)
+})

@@ -37,9 +37,12 @@ class Kunjungan extends ResourceController
 	 */
 	public function show($id = null)
 	{
-		//
+		if ($id == null) return $this->respond(res400(['message' => 'hemm mau ngapain ya?']));
+
+		$res = $this->model->find($id);
+		return $this->respond(res200(['data' => $res]));
 	}
-	
+
 	/**
 	 * Return a new resource object, with default properties
 	 *
