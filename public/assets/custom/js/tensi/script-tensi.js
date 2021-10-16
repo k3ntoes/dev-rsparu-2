@@ -1,3 +1,4 @@
+import { DaftarTunggu } from "../API/daftarTunggu.js";
 import { petugas } from "../API/petugas.js";
 import { tujuan } from "../API/tujuan.js";
 import { Api } from "../core/Api.js";
@@ -11,11 +12,14 @@ const Tensi = {
     init: async () => {
         petugas.find()
         tujuan.find()
-        $('.select2').select2()
+        $('.select2').select2({ width: '100%' })
         Tensi.setForm.reset()
+        await DaftarTunggu.action.showList('Tensi', $('#tgl').val(), 1)
+        DaftarTunggu.setData.data_table()
     },
     action: {
         simpan: async () => {
+            MainApp.cekCheckbox('demamWaktuPagi')
             const frm = document.getElementById('frmTensi')
             const formData = MainApp.formDatatoObj(new FormData(frm))
             let res
@@ -103,13 +107,13 @@ const Tensi = {
                 $('#nyeriDada').val(tensi.nyeriDada)
                 $(`#nyeriDadaLok${tensi.nyeriDadaLok}`).trigger('click')
                 $('#demam').val(tensi.demam)
-                console.log("test : ", tensi.demamWaktuPagi)
-                console.assert(tensi.demamWaktuPagi === "")
-                if (tensi.demamWaktuPagi !== null) {
-                    // tensi.demamWaktuPagi.forEach(e => {
-                    //     $(`#demamWaktuPagi${e}`).trigger('click')
-                    // })
+                if (tensi.demamWaktuPagi !== "") {
+                    let demamWaktuPagi = tensi.demamWaktuPagi.split(",")
+                    demamWaktuPagi.forEach(e => {
+                        $(`#demamWaktuPagi${e}`).prop('checked', true)
+                    })
                 }
+                $(`#penyDahulu`).val(tensi.penyDahulu)
                 $('#keluhanLain').val(tensi.keluhanLain)
                 $('#p_admin_tensi').val(petugas.p_admin_tensi).trigger('change')
                 $('#p_perawat_tensi').val(petugas.p_perawat_tensi).trigger('change')
@@ -123,7 +127,7 @@ const Tensi = {
 
 export { Tensi }
 
-Tensi.init()
+$(document).ready(() => { Tensi.init() })
 
 $('#smbrData0, #smbrData1').on('click', e => Tensi.setForm.setSumber(parseInt(e.target.value)))
 $('#statRujuk0, #statRujuk1').on('click', e => Tensi.setForm.setRuj(parseInt(e.target.value)))

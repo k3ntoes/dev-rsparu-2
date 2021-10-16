@@ -4,6 +4,7 @@ namespace App\Controllers\API;
 
 use App\Models\API\KunjunganModel;
 use App\Models\API\TensiModel;
+use App\Models\API\TransPetugasModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -17,6 +18,7 @@ class Tensi extends ResourceController
 	{
 		helper('cusresponse');
 		$this->transKunj = new KunjunganModel();
+		$this->transPetugas = new TransPetugasModel();
 	}
 	/**
 	 * Return an array of resource objects, themselves in array format
@@ -63,6 +65,7 @@ class Tensi extends ResourceController
 		$ex = $this->model->insert($body);
 		if (!$ex) return $this->respond(res400(['message' => 'ada yang salah', 'debug' => $ex]));
 		$updKunj = $this->transKunj->update($body->notrans, $body);
+		$updPetugas = $this->transPetugas->save($body);
 		return $this->respond(res201(['message' => 'Data berhasil disimpan', 'data' => $ex, "debug" => $updKunj]));
 	}
 
@@ -88,6 +91,7 @@ class Tensi extends ResourceController
 		$ex = $this->model->update($id, $body);
 		if (!$ex) return $this->respond(res400(['message' => 'ada yang salah', 'debug' => $ex]));
 		$updKunj = $this->transKunj->update($id, $body);
+		$updPetugas = $this->transPetugas->save($body);
 		return $this->respond(res201(['message' => 'Data berhasil diupdate', 'data' => $ex, "debug" => $updKunj]));
 	}
 

@@ -37,7 +37,7 @@
 <script src="/assets/scripts/chart.sparkline.init.min.js"></script>
 
 <!-- Select 2 -->
-<script src="/assets/plugin/select2/dist/js/select2.min.js"></script>
+<script src="/assets/plugin/select2/dist/js/select2.full.min.js"></script>
 
 <!-- DataTable -->
 <script src="/assets/plugin/DataTables/datatables.min.js"></script>

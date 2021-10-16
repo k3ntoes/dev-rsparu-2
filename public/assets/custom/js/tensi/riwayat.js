@@ -97,7 +97,13 @@ const Riwayat = {
             $(`#cacatFisikKet`).val(riwayat.cacatFisikKet)
             $(`#alatBantu${riwayat.alatBantu}`).trigger('click')
             $(`#alatBantuKet`).val(riwayat.alatBantuKet)
-            //$(`#penyDahulu`).val(riwayat.penyDahulu)
+            if (riwayat.penyDahulu !== "") {
+                let penyDahulu = riwayat.penyDahulu.split(",")
+                penyDahulu.forEach(e => {
+                    $(`#penyDahulu${e}`).prop('checked', true)
+                })
+            }
+            $(`#penyDahulu`).val(riwayat.penyDahulu)
             $(`#penyLain`).val(riwayat.penyLain)
             $(`#pengoTB${riwayat.pengoTB}`).trigger('click')
             $(`#pengoTBtahun`).val(riwayat.pengoTBtahun)
@@ -151,6 +157,17 @@ $('#operasi0, #operasi1').on('click', e => Riwayat.setForm.setOperasi(parseInt(e
 $('#rokok0, #rokok1').on('click', e => Riwayat.setForm.setRokok(parseInt(e.target.value)))
 $('#alkohol0, #alkohol1').on('click', e => Riwayat.setForm.setAlkohol(parseInt(e.target.value)))
 $('#obat0, #obat1').on('click', e => Riwayat.setForm.setObat(parseInt(e.target.value)))
+$(`input[name='penyDahulu[]']`).on('click', e => {
+    const checkId = e.target.getAttribute('id')
+    const checkName = e.target.getAttribute('name')
+    if (checkId === 'penyDahulu0') {
+        if ($(`#${checkId}`).is(':checked')) {
+            $(`input[name='${checkName}']`).prop('checked', false)
+            $(`#penyDahulu0`).prop('checked', true)
+        }
+    }
+    if (checkId !== 'penyDahulu0') $(`#penyDahulu0`).prop('checked', false)
+})
 
 $('#frmRiwayat').on('submit', e => {
     if (!e.isDefaultPrevented()) Riwayat.action.simpan()

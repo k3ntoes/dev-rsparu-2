@@ -9,10 +9,7 @@ const kecamatan = {
         C.srcIcon.show('fKec')
         $('#kkecamatan').find('option').remove().end()
         let str = "<option selected>-- Pilih --</option>"
-
-        const res = await R.requestGenerator(req)
         const res1 = await Api.showById('Kecamatan', kdKab)
-
         if (res1.metaData.code !== 200) return alert(res1.metaData.message)
 
         res1.response.data.forEach(d => {

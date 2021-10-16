@@ -6,8 +6,9 @@ const tujuan = {
     find: async () => {
         NProgress.start()
         $('#ktujuan').find('option').remove().end()
+        $('.ktujuan').find('option').remove().end()
         let str = "<option value selected>-- Pilih --</option>"
-        
+
         const res = await Api.showList('Tujuan')
 
         if (res.metaData.code !== 200) return alert(res.metaData.message)
@@ -17,6 +18,7 @@ const tujuan = {
         });
 
         $('#ktujuan').append(str)
+        $('.ktujuan').append(str)
         NProgress.done()
     },
     reset: () => {

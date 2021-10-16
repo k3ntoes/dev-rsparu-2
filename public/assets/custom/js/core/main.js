@@ -87,7 +87,7 @@ const MainApp = {
         let selesai = []
 
         data.forEach(e => {
-            console.assert(parseInt(e.ktujuan) === ktujuan)
+            // console.log(parseInt(e.ktujuan) === ktujuan)
             if (parseInt(e.ktujuan) === ktujuan) tunggu.push(e)
             else selesai.push(e)
         });

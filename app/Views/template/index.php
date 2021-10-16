@@ -35,6 +35,9 @@
     </div>
     <!--/#wrapper -->
 
+    <!-- Modal -->
+    <?= $this->include('template/pindah_modal') ?>
+
     <?= $this->include('template/js') ?>
 
     <?= $this->renderSection('view_js') ?>

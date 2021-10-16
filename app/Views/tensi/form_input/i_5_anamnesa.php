@@ -143,6 +143,7 @@
             </div>
             <label class="col-lg-1">, Waktu</label>
             <div class="col-lg-6">
+                <input type="hidden" name="demamWaktuPagi" id="demamWaktuPagi">
                 <ul class="list-inline">
                     <li>
                         <div class="checkbox info">
