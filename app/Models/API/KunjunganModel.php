@@ -2,6 +2,8 @@
 
 namespace App\Models\API;
 
+date_default_timezone_set('Asia/Jakarta');
+
 use CodeIgniter\Model;
 
 class KunjunganModel extends Model
@@ -73,13 +75,13 @@ class KunjunganModel extends Model
 	function generateNoTrans($norm, $tgltrans)
 	{
 		$d = date('mY');
-		$res = $this->builder($this->table)
+		$res = $this->builder()
 			->select('notrans', 'norm')
 			->where('norm', $norm)
 			->where('YEAR(tgltrans)', DATE('Y', strtotime($tgltrans)))
 			->where('MONTH(tgltrans)', DATE('m', strtotime($tgltrans)))
 			->get()
-			->getFirstRow();
+			->getLastRow();
 
 		if (!$res) return $norm . $d . '01';
 		$urut = substr($res->notrans, -2, 2) + 1;

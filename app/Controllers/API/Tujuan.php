@@ -18,7 +18,8 @@ class Tujuan extends ResourceController
 	 */
 	public function index()
 	{
-		//
+		$result = $this->model->where('stat', 1)->find();
+		return $this->respond(res200(['data' => $result]));
 	}
 
 	/**
@@ -29,8 +30,7 @@ class Tujuan extends ResourceController
 	public function show($id = null)
 	{
 		if ($id == null) {
-			$result = $this->model->where('stat', 1)->find();
-			return $this->respond(res200(['data' => $result]));
+			return $this->respondNoContent('hmmm');
 		}
 		$result = $this->model->find($id);
 		if ($result) return $this->respondCreated(res200($result));

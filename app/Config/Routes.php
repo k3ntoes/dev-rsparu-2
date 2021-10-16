@@ -71,8 +71,13 @@ $routes->resource('API/Pasien');
 $routes->post('API/PasienOld/form/cari', 'API\PasienOld::cari');
 $routes->resource('API/PasienOld');
 $routes->resource('API/Kunjungan');
+$routes->resource('API/TransPetugas');
+$routes->resource('API/Tensi');
+$routes->resource('API/Diagnosa');
+$routes->resource('API/RiwayatTensi');
 $routes->group('API/Riwayat', function ($routes) {
     $routes->post('/Kunjungan', 'API\Riwayat::kunjungan'); //for loket
+    $routes->get('/Pemeriksaan/(:any)', 'API\Riwayat::pemeriksaan/$1'); //riwayat tensi
 });
 $routes->group('API/DaftarTunggu', function ($routes) {
     $routes->get('/Tensi/(:any)', 'API\DaftarTunggu::tensi/$1');

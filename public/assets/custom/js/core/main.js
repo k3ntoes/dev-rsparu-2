@@ -54,6 +54,15 @@ const MainApp = {
     base_uri: window.location.origin,
     token: `Bearer ${getToken()}`,
     formDatatoObj: (frmData) => formDatatoObj(frmData),
+    serializeToObj: arr => {
+        const str = arr.reduce((d, x) => {
+            d += `"${x.name}": "${x.value}",`
+            return d
+        }, "")
+        const json = `{ ${str.substring(0, str.length - 1)}}`
+
+        return JSON.parse(json)
+    },
     srcIcon: srcIcon,
     autoSelect: (id, val) => {
         $(`select#${id} option`).each(function () {
@@ -67,6 +76,39 @@ const MainApp = {
         })
         $(`#${id}`).trigger('change')
         return $(`#${id}`).val()
+    },
+    autoScroll: id => {
+        $('html, body').animate({
+            scrollTop: $(`#${id}`).offset().top - 60
+        }, 1000);
+    },
+    mapping: (data, ktujuan) => {
+        let tunggu = []
+        let selesai = []
+
+        data.forEach(e => {
+            console.assert(parseInt(e.ktujuan) === ktujuan)
+            if (parseInt(e.ktujuan) === ktujuan) tunggu.push(e)
+            else selesai.push(e)
+        });
+
+        return {
+            tunggu: tunggu,
+            countTunggu: tunggu.length,
+            selesai: selesai,
+            countSelesai: selesai.length
+        }
+    },
+    cekCheckbox: (id) => {
+        const checkboxes = document.getElementsByName(`${id}[]`);
+        let vals = "";
+        for (let i = 0, n = checkboxes.length; i < n; i++) {
+            if (checkboxes[i].checked) {
+                vals += "," + checkboxes[i].value;
+            }
+        }
+        if (vals) vals = vals.substring(1);
+        $(`#${id}`).val(vals)
     }
 }
 

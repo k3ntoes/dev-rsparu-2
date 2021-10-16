@@ -25,7 +25,7 @@
 
 <div class="row row-inline-block small-spacing">
     <div class="col-lg-12">
-        <div class="box-content bordered primary">
+        <div class="box-content bordered primary" id="tungguPanel">
             <h4 class="box-title">DaftarTunggu</h4>
             <hr class="garis-bawah">
             <?= $this->include('daftartunggu/index') ?>
@@ -33,14 +33,14 @@
     </div>
 
     <div class="col-lg-12 col-sm-12">
-        <div class="box-content bordered warning">
+        <div class="box-content bordered warning" id="formPanel">
             <?= $this->include('biodata/index') ?>
 
             <div class="card-content" id="formTensi">
                 <div class="card-content">
                     <ul id="myTabs" class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#iTensi" aria-controls="iTensi" role="tab" data-toggle="tab">Tensi</a></li>
-                        <li role="presentation"><a href="#iRiwayat" aria-controls="iRiwayat" role="tab" data-toggle="tab">Riwayat</a></li>
+                        <li role="presentation" class="active" id='liTensi'><a href="#iTensi" aria-controls="iTensi" role="tab" data-toggle="tab">Tensi</a></li>
+                        <li role="presentation" id='liRiwayat'><a href="#iRiwayat" aria-controls="iRiwayat" role="tab" data-toggle="tab">Riwayat</a></li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="iTensi">

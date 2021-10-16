@@ -2,7 +2,7 @@
     <label for="tgltrans" class="col-lg-1">Tanggal</label>
     <div class="col-lg-2">
         <div class="input-group date" data-date-format="yyyy-mm-dd">
-            <input type="text" name="tgltrans" id="tgltrans" class="form-control input-sm datepicker" required="required" placeholder="yyyy-mm-dd" value="2019-08-16" readonly="">
+            <input type="text" name="tgltrans" id="tgltrans" class="form-control input-sm datepicker" required="required" placeholder="yyyy-mm-dd" value="<?= date('Y-m-d') ?>" readonly="">
             <span class="input-group-addon bg-info text-white">
                 <i class="fa fa-calendar"></i>
             </span>
@@ -20,7 +20,7 @@
     <label for="norm" class="col-lg-1">Norm.</label>
     <div class="col-lg-2">
         <div class="input-group input-group-sm">
-            <input type="text" name="norm" maxlength="6" class="form-control input-sm" id="norm" placeholder="NO RM">
+            <input type="text" name="norm" maxlength="6" class="form-control input-sm" id="norm" placeholder="NO RM" required="required">
             <div class="input-group-addon btn">
                 <span class="glyphicon glyphicon-search" id="find_norm_tensi"></span>
             </div>

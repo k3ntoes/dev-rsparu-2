@@ -52,10 +52,10 @@
         </div>
 
         <div class="form-group">
-            <label class="col-lg-4" for="spo2_1">E. SP O2 </label>
+            <label class="col-lg-4" for="spo2">E. SP O2 </label>
             <div class="col-lg-5">
                 <div class="input-group">
-                    <input type="text" id="spo2_1" name="spo2_1" class="form-control" placeholder="SP O2" required="">
+                    <input type="text" id="spo2" name="spo2" class="form-control" placeholder="SP O2" required="">
                     <div class="input-group-addon">
                         <span class="">%</span>
                     </div>

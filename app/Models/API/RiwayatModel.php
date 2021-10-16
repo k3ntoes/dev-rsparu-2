@@ -71,4 +71,12 @@ class RiwayatModel extends Model
 		if (!$res) return null;
 		return $res;
 	}
+
+	public function riwayat_tensi($norm)
+	{
+		$result = $this->builder('t_riwayat')->where('norm', $norm)->get()->getResultObject();
+
+		if (!$result) return null;
+		return $result;
+	}
 }

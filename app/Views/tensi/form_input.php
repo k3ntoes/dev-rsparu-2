@@ -1,4 +1,4 @@
-<form id="frmTensi" method="post" class="form-horizontal" onsubmit="return false;">
+<form action="#" id="frmTensi" method="post" class="form-horizontal">
     <?= $this->include('tensi/form_input/i_0_sumber') ?>
 
     <h5 class="col-sm-12 text-center"><b>Pengkajian (Assesmen)</b></h5>

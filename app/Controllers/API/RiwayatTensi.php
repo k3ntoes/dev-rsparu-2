@@ -2,15 +2,20 @@
 
 namespace App\Controllers\API;
 
-use App\Models\API\PetugasModel;
+use App\Models\API\RiwayatTensiModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-class Petugas extends ResourceController
+class RiwayatTensi extends ResourceController
 {
 	use ResponseTrait;
-	protected $modelName = PetugasModel::class;
+	protected $modelName = RiwayatTensiModel::class;
 	protected $type = 'json';
+
+	function __construct()
+	{
+		helper('cusresponse');
+	}
 
 	/**
 	 * Return an array of resource objects, themselves in array format
@@ -19,8 +24,7 @@ class Petugas extends ResourceController
 	 */
 	public function index()
 	{
-		$result = $this->model->findAll();
-		return $this->respond(res200(['data' => $result]));
+		//
 	}
 
 	/**
@@ -30,11 +34,10 @@ class Petugas extends ResourceController
 	 */
 	public function show($id = null)
 	{
-		if ($id == null) {
-			return $this->respondNoContent('Hmm');
-		}
-		$result = $this->model->find($id);
-		return $this->respond(res200(['data' => $result]));
+		if ($id == null) return $this->respondNoContent('Hmmm');
+		$res = $this->model->find($id);
+		if (!$res) return $this->respond(res204(['message' => 'riwayat belum ada']));
+		return $this->respond(res200(['data' => $res]));
 	}
 
 	/**
@@ -54,7 +57,12 @@ class Petugas extends ResourceController
 	 */
 	public function create()
 	{
-		//
+		$body = json_decode($this->request->getBody());
+		$body->norm = $body->rw_norm;
+		$ex = $this->model->insert($body);
+
+		if (!$ex) return $this->respond(res304(['message' => 'sepertinya ada yang salah nih']));
+		return $this->respond(res201(['message' => 'Data Riwayat berhasil disimpan!']));
 	}
 
 	/**
@@ -74,7 +82,12 @@ class Petugas extends ResourceController
 	 */
 	public function update($id = null)
 	{
-		//
+		$body = json_decode($this->request->getBody());
+		$body->norm = $body->rw_norm;
+		$ex = $this->model->update($id, $body);
+
+		if (!$ex) return $this->respond(res304(['message' => 'sepertinya ada yang salah nih']));
+		return $this->respond(res201(['message' => 'Data Riwayat berhasil diupdate!']));
 	}
 
 	/**

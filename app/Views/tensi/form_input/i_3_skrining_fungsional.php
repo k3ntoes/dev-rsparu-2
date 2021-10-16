@@ -33,7 +33,7 @@
                             <label for="psiko3"></label>
                         </span>
                     </div>
-                    <input type="text" id="tb" name="tb" class="form-control" placeholder="Tinggi Badan" required="">
+                    <input type="text" id="otherPsiko" name="otherPsiko" class="form-control" placeholder="Lain-lain">
                 </div>
             </div>
         </div>

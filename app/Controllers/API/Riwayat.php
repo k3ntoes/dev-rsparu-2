@@ -24,4 +24,11 @@ class Riwayat extends ResourceController
 		if ($result == null) return $this->respond(res204(['message' => 'Data tidak ditemukan!']));
 		return $this->respond(res200(['data' => $result]));
 	}
+
+	public function pemeriksaan($norm = null)
+	{
+		$result = $this->model->riwayat_tensi($norm);
+		if ($result == null) return $this->respond(res204(['message' => 'Data tidak ditemukan!']));
+		return $this->respond(res200(['data' => $result]));
+	}
 }

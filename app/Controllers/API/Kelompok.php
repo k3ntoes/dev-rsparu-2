@@ -24,8 +24,8 @@ class Kelompok extends ResourceController
 	 */
 	public function index()
 	{
-		//
-		echo "au ah gelap";
+		$result = $this->model->findAll();
+		return $this->respond(res200(['data' => $result]));
 	}
 
 	/**
@@ -36,8 +36,7 @@ class Kelompok extends ResourceController
 	public function show($id = null)
 	{
 		if ($id == null) {
-			$result = $this->model->findAll();
-			return $this->respond(res200(['data' => $result]));
+			return $this->respondNoContent('hmmm');
 		}
 		$result = $this->model->find($id);
 		if ($result) return $this->respondCreated(res200($result));

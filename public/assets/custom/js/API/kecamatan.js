@@ -1,3 +1,4 @@
+import { Api } from "../core/Api.js";
 import { MainApp as C } from "../core/main.js";
 import { RequestHelper as R } from "../core/request_helper.js";
 import { kelurahan } from "./kelurahan.js";
@@ -9,15 +10,8 @@ const kecamatan = {
         $('#kkecamatan').find('option').remove().end()
         let str = "<option selected>-- Pilih --</option>"
 
-        const uri = `${C.base_uri}/API/Kecamatan/${kdKab}`
-        const req = {
-            uri: uri,
-            method: "GET",
-            token: C.token
-        }
-
         const res = await R.requestGenerator(req)
-        const res1 = await res.json()
+        const res1 = await Api.showById('Kecamatan', kdKab)
 
         if (res1.metaData.code !== 200) return alert(res1.metaData.message)
 

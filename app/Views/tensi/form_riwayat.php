@@ -1,4 +1,4 @@
-<form id="frmRiwayat" method="post" class="form-horizontal" onsubmit="return false;">
+<form action="#" id="frmRiwayat" method="post" class="form-horizontal" data-toggle="validator" role="form">
     <h4 class="col-sm-12 text-center"><b>Riwayat</b></h4>
     <hr class="garisBawah">
 

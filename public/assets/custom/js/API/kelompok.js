@@ -1,3 +1,4 @@
+import { Api } from "../core/Api.js";
 import { MainApp as C } from "../core/main.js";
 import { RequestHelper as R } from "../core/request_helper.js";
 
@@ -6,19 +7,11 @@ const kelompok = {
         $('#kkelompok').find('option').remove().end()
         let str = ""
 
-        const uri = `${C.base_uri}/API/Kelompok/`
-        const req = {
-            uri: uri,
-            method: "GET",
-            token: C.token
-        }
+        const res = await Api.showList('Kelompok')
 
-        const res = await R.requestGenerator(req)
-        const res1 = await res.json()
+        if (res.metaData.code !== 200) return window.location.href = `${window.location.origin}/logout`
 
-        if (res1.metaData.code !== 200) return window.location.href = `${window.location.origin}/logout`
-
-        res1.response.data.forEach(d => {
+        res.response.data.forEach(d => {
             str += `<option value='${d.kkelompok}' data-biaya='${d.biaya}'>${d.kelompok}</option>`
         });
 

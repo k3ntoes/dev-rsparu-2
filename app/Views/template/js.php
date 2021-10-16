@@ -42,15 +42,20 @@
 <!-- DataTable -->
 <script src="/assets/plugin/DataTables/datatables.min.js"></script>
 
-<!-- <script src="/assets/scripts/main.min.js"></script> -->
-<script src="/assets/custom/js/core/main-template.js"></script>
-<script src="/assets/color-switcher/color-switcher.min.js"></script>
+<!-- Validator -->
+<script src="assets/plugin/validator/validator.min.js"></script>
+
 
 <!-- Notify -->
 <script src="/assets/plugin/notify/bootstrap-notify.min.js"></script>
 
 <!-- Toastr -->
 <script src="/assets/plugin/toastr/toastr.min.js"></script>
+
+<!-- <script src="/assets/scripts/main.min.js"></script> -->
+<script src="/assets/custom/js/core/main-template.js"></script>
+<script src="/assets/color-switcher/color-switcher.min.js"></script>
+
 
 <!-- Socket IO -->
 <!-- <script src="http://localhost:2000/modules/socket.io/client-dist/socket.io.js"></script> -->

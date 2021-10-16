@@ -1,10 +1,12 @@
+import { MainApp } from "./main.js"
+
 const RequestHelper = {
     optionGenerator: (req) => {
         if (req.method === "GET" || req.method === "DELETE") {
             return {
                 headers: {
                     "content-type": "application/json",
-                    "X-Token": req.token
+                    "X-Token": MainApp.token
                 },
                 method: req.method
             }
@@ -13,7 +15,7 @@ const RequestHelper = {
         return {
             headers: {
                 "content-type": "application/json",
-                "X-Token": req.token
+                "X-Token": MainApp.token
             },
             method: req.method,
             body: JSON.stringify(req.formData)

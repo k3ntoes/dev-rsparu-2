@@ -1,5 +1,6 @@
 <div class="form-group">
     <label class="col-sm-3">C. Riwayat Penyakit Dahulu</label>
+    <input type="hidden" name="penyDahulu" id="penyDahulu">
     <ul class="list-inline col-sm-9">
         <li>
             <div class="checkbox info">
@@ -53,10 +54,10 @@
 </div>
 
 <div class="form-group">
-<div class="col-sm-3">&nbsp;</div>
-<label for="penyLain" class="col-sm-2">Penyakit Lain</label>
-<div class="col-sm-4">
-    <input type="text" id="penyLain" name="penyLain" class="form-control" placeholder="Penyakit Lain" required="">
-</div>
+    <div class="col-sm-3">&nbsp;</div>
+    <label for="penyLain" class="col-sm-2">Penyakit Lain</label>
+    <div class="col-sm-4">
+        <input type="text" id="penyLain" name="penyLain" class="form-control" placeholder="Penyakit Lain" required="">
+    </div>
 </div>
 <hr class="garisBawah">

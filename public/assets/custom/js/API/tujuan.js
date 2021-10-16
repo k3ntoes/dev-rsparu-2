@@ -1,3 +1,4 @@
+import { Api } from "../core/Api.js"
 import { MainApp as C } from "../core/main.js"
 import { RequestHelper as R } from "../core/request_helper.js"
 
@@ -6,20 +7,12 @@ const tujuan = {
         NProgress.start()
         $('#ktujuan').find('option').remove().end()
         let str = "<option value selected>-- Pilih --</option>"
+        
+        const res = await Api.showList('Tujuan')
 
-        const uri = `${C.base_uri}/API/Tujuan/`
-        const req = {
-            uri: uri,
-            method: "GET",
-            token: C.token
-        }
+        if (res.metaData.code !== 200) return alert(res.metaData.message)
 
-        const res = await R.requestGenerator(req)
-        const res1 = await res.json()
-
-        if (res1.metaData.code !== 200) return alert(res1.metaData.message)
-
-        res1.response.data.forEach(d => {
+        res.response.data.forEach(d => {
             str += `<option value='${d.kd_tujuan}'>${d.tujuan}</option>`
         });
 

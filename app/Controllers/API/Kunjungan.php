@@ -95,8 +95,7 @@ class Kunjungan extends ResourceController
 	private function updKunj($req)
 	{
 		$cekKunj = (object)$this->model->isTransExist($req);
-		$updateKunj = $this->model
-			->update($cekKunj->data->notrans, (array)$req);
+		$updateKunj = $this->model->update($cekKunj->data->notrans, (array)$req);
 		return $this->respondCreated(res201(['message' => 'Data berhasil diupdate', 'data' => $cekKunj->data->notrans]));
 	}
 
