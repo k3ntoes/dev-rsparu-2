@@ -17,6 +17,11 @@ const DaftarTunggu = {
             let strTunggu = ""
             let strSelesai = ""
 
+            if ($.fn.DataTable.isDataTable('#listDaftarTunggu')) {
+                $('#listDaftarTunggu').DataTable().destroy();
+                $('#listDaftarSelesai').DataTable().destroy();
+            }
+
             if (res.metaData.code !== 200) {
                 $('#listDaftarTunggu tbody').html(strTunggu)
                 $('#listDaftarSelesai tbody').html(strSelesai)
@@ -24,9 +29,10 @@ const DaftarTunggu = {
                 return
             }
 
+            $('#listDaftarTunggu tbody').html(strTunggu)
+            $('#listDaftarSelesai tbody').html(strSelesai)
+
             const data = res.response.data
-
-
 
             const o = MainApp.mapping(data, ktujuan)
             if (o.countTunggu === 0) toastr['info']('Tidak ada Antrian tunggu Tensi')
@@ -43,7 +49,7 @@ const DaftarTunggu = {
                             <div class='btn-group btn-group-xs'>
                                 <span class='btn btn-xs btn-danger glyphicon glyphicon-pencil' data-action='edit' data-notrans='${d.notrans}'></span>
                                 <span class='btn btn-xs btn-success glyphicon glyphicon-print' data-action='cetak' data-notrans='${d.norm}'></span>
-                                <span class='btn btn-xs btn-warning glyphicon glyphicon-share-alt' data-action='pindah' data-notrans='${d.notrans}'></span>
+                                <span class='btn btn-xs btn-warning glyphicon glyphicon-share-alt' data-action='pindah' data-toggle="modal" data-target="#pindahModal" data-notrans='${d.notrans}'></span>
                             </div>
                         </td>` +
                     `<td>${d.nourut}</td>` +
@@ -65,7 +71,7 @@ const DaftarTunggu = {
                     `<td class='row small-spacing'>
                             <div class='btn-group btn-group-xs'>
                                <span class='btn btn-xs btn-success glyphicon glyphicon-print' data-action='cetak' data-notrans='${d.norm}'></span>
-                                <span class='btn btn-xs btn-warning glyphicon glyphicon-share-alt' data-toggle="modal" data-target="#pindahModal" data-notrans='${d.notrans}'></span>
+                                <span class='btn btn-xs btn-warning glyphicon glyphicon-share-alt' data-action='pindah' data-toggle="modal" data-target="#pindahModal" data-notrans='${d.notrans}'></span>
                             </div>
                         </td>` +
                     `<td>${d.nourut}</td>` +

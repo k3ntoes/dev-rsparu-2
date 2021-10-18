@@ -109,6 +109,9 @@ const MainApp = {
         }
         if (vals) vals = vals.substring(1);
         $(`#${id}`).val(vals)
+    },
+    cetak: (norm = null, notrans = notrans) => {
+        console.log("do cetak")
     }
 }
 

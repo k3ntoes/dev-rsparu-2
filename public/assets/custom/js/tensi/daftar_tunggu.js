@@ -2,6 +2,7 @@ import { DaftarTunggu } from '../API/daftarTunggu.js'
 import { kunjungan } from '../API/kunjungan.js'
 import { trans_petugas } from '../API/trans_petugas.js'
 import { Api } from '../core/Api.js'
+import { MainApp } from '../core/main.js'
 import { biodata } from './biodata.js'
 import { Riwayat } from './riwayat.js'
 import { Tensi } from './script-tensi.js'
@@ -49,6 +50,25 @@ const Module = {
             Riwayat.setForm.riwayat(dataKunj, dataRiwayat)
 
             NProgress.done()
+        },
+        doPindah: async () => {
+            NProgress.start()
+            const formData = {
+                notrans: $('#notrans-pindah').val(),
+                ktujuan: $('#ktujuan-pindah').val()
+            }
+            const res = await Api.put('Kunjungan', formData.notrans, formData)
+            if (res.metaData.code !== 201) return toastr['error'](res.response.message)
+            toastr['info'](res.response.message)
+            $('#pindahModal').modal('hide')
+            await DaftarTunggu.action.showList('Tensi', $('#tgl').val(), 1)
+            DaftarTunggu.setData.data_table()
+            NProgress.done()
+        }
+    },
+    setData: {
+        setModal: notrans => {
+            $('#notrans-pindah').val(notrans)
         }
     }
 }
@@ -62,9 +82,19 @@ $('#listDaftarTunggu tbody').on('click', 'span.btn', async e => {
     const aksi = e.target.dataset.action
     const id = e.target.dataset.notrans
     if (aksi === 'edit') return Module.action.doEdit(id)
+    if (aksi === 'pindah') return Module.setData.setModal(id)
 })
+
+$('#listDaftarSelesai tbody').on('click', 'span.btn', async e => {
+    const aksi = e.target.dataset.action
+    const id = e.target.dataset.notrans
+    if (aksi === 'cetak') return MainApp.cetak()
+    Module.setData.setModal(id)
+})
+
 $('.nav-tabs').on('click', 'li', e => {
     setTimeout(DaftarTunggu.setData.data_table, 100)
 })
 
+$('#simpan-pindah').on('click', Module.action.doPindah)
 

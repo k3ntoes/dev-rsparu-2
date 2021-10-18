@@ -9,7 +9,7 @@
                 <form action="#" id="frmPindah">
                     <div class="form-group">
                         <label for="notrans-pindah">Notrans</label>
-                        <input type="text" id="notrans-pindah" class="form-control">
+                        <input type="text" id="notrans-pindah" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label for="ktujuan-pindah">Tujuan</label>
@@ -19,7 +19,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm waves-effect waves-light" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-sm waves-effect waves-light">Save changes</button>
+                <button type="button" id="simpan-pindah" class="btn btn-primary btn-sm waves-effect waves-light">Save changes</button>
             </div>
         </div>
     </div>

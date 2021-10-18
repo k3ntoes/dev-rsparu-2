@@ -3,15 +3,12 @@ import { petugas } from "../API/petugas.js";
 import { tujuan } from "../API/tujuan.js";
 import { Api } from "../core/Api.js";
 import { MainApp } from "../core/main.js";
-import { RequestHelper } from "../core/request_helper.js";
 import { biodata } from "./biodata.js";
 import { daftar_tunggu_tensi } from "./daftar_tunggu.js";
 import { Riwayat } from "./riwayat.js";
 
 const Tensi = {
     init: async () => {
-        petugas.find()
-        tujuan.find()
         $('.select2').select2({ width: '100%' })
         Tensi.setForm.reset()
         await DaftarTunggu.action.showList('Tensi', $('#tgl').val(), 1)
@@ -68,9 +65,12 @@ const Tensi = {
             Tensi.setForm.setSumber(0)
             Tensi.setForm.setRuj(0)
             Tensi.setForm.setPsiko(0)
+            $('#otherPsiko').attr('readonly', 'readonly')
 
             $('#p_admin_tensi').val(p_admin_tensi).trigger('change')
             $('#p_perawat_tensi').val(p_perawat_tensi).trigger('change')
+
+            MainApp.autoScroll('tungguPanel')
 
             daftar_tunggu_tensi.init()
         },
@@ -96,6 +96,7 @@ const Tensi = {
                 $(`#hilangBB3Bln${tensi.hilangBB3Bln}`).trigger('click')
                 $(`#turunAsupMkn${tensi.turunAsupMkn}`).trigger('click')
                 $(`#psiko${tensi.psiko}`).trigger('click')
+                Tensi.setForm.setPsiko(parseInt(tensi.psiko))
                 $('#otherPsiko').val(tensi.otherPsiko)
                 $('#hasilPeriksaSebelumnya').val(tensi.hasilPeriksaSebelumnya)
                 $('#batuk').val(tensi.batuk)
@@ -127,10 +128,17 @@ const Tensi = {
 
 export { Tensi }
 
+petugas.find()
+tujuan.find()
+
 $(document).ready(() => { Tensi.init() })
 
 $('#smbrData0, #smbrData1').on('click', e => Tensi.setForm.setSumber(parseInt(e.target.value)))
 $('#statRujuk0, #statRujuk1').on('click', e => Tensi.setForm.setRuj(parseInt(e.target.value)))
+$(`input[name=psiko]`).on('click', () => {
+    if ($('#psiko3').is(':checked')) $('#otherPsiko').removeAttr('readonly')
+    else $('#otherPsiko').attr('readonly', 'readonly')
+})
 
 $('#frmTensi').on("submit", e => {
     if (!e.isDefaultPrevented()) Tensi.action.simpan()

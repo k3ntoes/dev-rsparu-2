@@ -116,7 +116,11 @@ class Kunjungan extends ResourceController
 	 */
 	public function update($id = null)
 	{
-		//
+		if ($id == null) return $this->respondNoContent('Hayo mau ngapain???');
+		$body = json_decode($this->request->getBody());
+		$u = $this->model->update($id, $body);
+		if (!$u) return $this->respond(res204(['message' => 'Sepertinya ada yang salah nih']));
+		return $this->respond(res201(['message' => 'data berhasil di update']));
 	}
 
 	/**
