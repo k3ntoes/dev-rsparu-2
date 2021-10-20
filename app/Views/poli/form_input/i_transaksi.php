@@ -5,7 +5,7 @@
             <label for="tgltrans" class="col-lg-3 col-sm-4">Tanggal</label>
             <div class="col-lg-4 col-sm-8">
                 <div class="input-group date" data-date-format="yyyy-mm-dd">
-                    <input type="text" name="tgltrans" id="tgltrans" class="form-control input-sm datepicker" required="required" placeholder="yyyy-mm-dd" value="2019-08-16" readonly="">
+                    <input type="text" name="tgltrans" id="tgltrans" class="form-control input-sm datepicker" required="required" placeholder="yyyy-mm-dd" value="<?= date('Y-m-d') ?>" readonly="">
                     <span class="input-group-addon bg-info text-white">
                         <i class="fa fa-calendar"></i>
                     </span>

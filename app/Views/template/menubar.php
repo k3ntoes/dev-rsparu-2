@@ -28,7 +28,7 @@
                 </li>
                 <li id="Poli">
                     <a class="waves-effect" href="/Poli">
-                        <i class="menu-icon mdi mdi-pinterset"></i>
+                        <i class="menu-icon mdi mdi-pinterest"></i>
                         <span>Poli</span>
                     </a>
                 </li>

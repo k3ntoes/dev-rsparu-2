@@ -19,11 +19,16 @@ const petugas = {
             let kdJab = parseInt(d.kd_jab)
             if (kdJab === 10 || kdJab === 17 || kdJab === 18) strLoket += `<option value='${d.nip}'>${nama}</option>`
             if (kdJab === 10) strPerawat += `<option value='${d.nip}'>${nama}</option>`
-            if (kdJab === 1) strDokter += `<option value='${d.nip}'>${nama}</option>`
+            if (kdJab === 1 || kdJab === 7 || kdJab === 8) strDokter += `<option value='${d.nip}'>${nama}</option>`
         });
 
         if (group === "loket") return $('#p_loket').append(strLoket)
         if (group === "tensi") return $('#p_admin_tensi, #p_perawat_tensi').append(strPerawat)
+        if (group === "poli") {
+            $('#p_admin_poli, #p_admin_poli_konsul').append(strPerawat)
+            $('#p_dokter_poli, #p_dokter_poli_konsul').append(strDokter)
+            return
+        }
 
     }
 }

@@ -9,9 +9,11 @@
         <!-- /.ico-item -->
         <div class="ico-item fa fa-arrows-alt js__full_screen"></div>
         <div class="ico-item">
+            <input type="hidden" id="user_id" id="user_id" value="<?= user()->id ?>">
             <input type="hidden" id="username" value="<?= user()->username ?>">
             <input type="hidden" id="group" value="<?= array_values(user()->getRoles())[0] ?>">
-            <img src="http://placehold.it/80x80" alt="" class="ico-img">
+            <!-- <img src="http://placehold.it/80x80" alt="" class="ico-img"> -->
+            <i class="ico-img ico mdi mdi-account-circle"></i>
             <ul class="sub-ico-item">
                 <!-- <li><a href="#">Settings</a></li>
                 <li><a href="#">Blog</a></li> -->

@@ -100,6 +100,20 @@ ul.list-inline li .checkbox label, ul.list-inline li .radio label {
     font-size: 12px;
 }
 
+table .btn.btn-xs {
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 3px 9px;
+}
+
+table .checkbox,
+.radio {
+    position: relative;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .sidebar-menu li>a>.pull-right-container {
     position: absolute;
     right: 10px;

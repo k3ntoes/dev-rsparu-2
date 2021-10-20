@@ -11,8 +11,6 @@ const Tensi = {
     init: async () => {
         $('.select2').select2({ width: '100%' })
         Tensi.setForm.reset()
-        await DaftarTunggu.action.showList('Tensi', $('#tgl').val(), 1)
-        DaftarTunggu.setData.data_table()
     },
     action: {
         simpan: async () => {
@@ -55,7 +53,7 @@ const Tensi = {
             if (id === 3) return $('#otherPsiko').removeAttr('readonly')
             return $('#otherPsiko').attr('readonly', 'readonly')
         },
-        reset: () => {
+        reset: async () => {
             const p_admin_tensi = $('#p_admin_tensi').val()
             const p_perawat_tensi = $('#p_perawat_tensi').val()
             biodata.resetData()
@@ -71,8 +69,10 @@ const Tensi = {
             $('#p_perawat_tensi').val(p_perawat_tensi).trigger('change')
 
             MainApp.autoScroll('tungguPanel')
+            await DaftarTunggu.action.showList('Tensi', $('#tgl').val(), 1)
+            DaftarTunggu.setData.data_table()
 
-            daftar_tunggu_tensi.init()
+            // Tensi.init()
         },
         tensi: (kunj, res_tensi, t_petugas) => {
             $('#norm').val(kunj.norm)

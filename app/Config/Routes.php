@@ -82,6 +82,7 @@ $routes->group('API/Riwayat', function ($routes) {
 $routes->group('API/DaftarTunggu', function ($routes) {
     $routes->get('/Tensi/(:any)', 'API\DaftarTunggu::tensi/$1');
 });
+$routes->resource('API/TransPoli');
 // End API
 
 //Report

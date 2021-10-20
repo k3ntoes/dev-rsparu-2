@@ -2,21 +2,7 @@
 
 <!-- View CSS -->
 <?php $this->section('view_css') ?>
-<style>
-    table .btn.btn-xs {
-        font-size: 12px;
-        line-height: 1.5;
-        padding: 3px 9px;
-    }
 
-    table .checkbox,
-    .radio {
-        position: relative;
-        display: block;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-</style>
 <?php $this->endSection() ?>
 <!-- View CSS -->
 

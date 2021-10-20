@@ -7,7 +7,7 @@
 <button id="bRiwayat" class="btn btn-xs btn-block btn-warning" onclick="getRiwayat('');">RIWAYAT</button>
 <hr class="garisBawah">
 
-<form id="frmInputPoli" method="post" class="form-horizontal" onsubmit="return false;">
+<form id="frmInputPoli" method="post" class="form-horizontal">
     <?= $this->include('poli/form_input/i_transaksi') ?>
 
     <?= $this->include('poli/form_input/i_1_pemeriksaan_fisik') ?>

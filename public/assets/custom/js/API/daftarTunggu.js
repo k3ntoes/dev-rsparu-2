@@ -18,8 +18,8 @@ const DaftarTunggu = {
             let strSelesai = ""
 
             if ($.fn.DataTable.isDataTable('#listDaftarTunggu')) {
-                $('#listDaftarTunggu').DataTable().destroy();
-                $('#listDaftarSelesai').DataTable().destroy();
+                $('#listDaftarTunggu').DataTable().clear().destroy();
+                $('#listDaftarSelesai').DataTable().clear().destroy();
             }
 
             if (res.metaData.code !== 200) {
