@@ -20,20 +20,23 @@
 
     <div class="col-lg-12 col-sm-12">
         <div class="box-content bordered warning" id="formPanel">
+            <?= $this->include('biodata/index') ?>
+
             <?= $this->include('poli/form_input') ?>
         </div>
     </div>
+</div>
 
-    <?php $this->endSection() ?>
-    <!-- View Content -->
+<?php $this->endSection() ?>
+<!-- View Content -->
 
 
-    <!-- View JS -->
-    <?php $this->section('view_js') ?>
-    <?php if (intval(user()->id) == 2) : ?>
-        <script type="module" src="/assets/custom/js/poli/poli_umum.js"></script>
-    <?php else : ?>
-        <script type="module" src="/assets/custom/js/poli/poli_tb.js"></script>
-    <?php endif ?>
-    <?php $this->endSection() ?>
-    <!-- View JS -->
+<!-- View JS -->
+<?php $this->section('view_js') ?>
+<?php if (intval(user()->id) == 2) : ?>
+    <script type="module" src="/assets/custom/js/poli/poli_umum.js"></script>
+<?php else : ?>
+    <script type="module" src="/assets/custom/js/poli/poli_tb.js"></script>
+<?php endif ?>
+<?php $this->endSection() ?>
+<!-- View JS -->

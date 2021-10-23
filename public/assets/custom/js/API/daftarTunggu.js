@@ -40,6 +40,12 @@ const DaftarTunggu = {
 
             o.tunggu.forEach(d => {
                 let statSelesai = `<label class='label label-primary' style="font-size: 11px;">Belum Selesai</label>`
+                const nik = d.noktp
+                    .split("")
+                    .reduce((r, a, i) => {
+                        if (i < 6 || r === 15) r += a
+                        else r += '*'
+                    }, "")
                 strTunggu += `<tr>` +
                     `<td class='row small-spacing'>
                             <div class="checkbox info col-lg-2" style="margin-top: -2px;">
@@ -54,7 +60,7 @@ const DaftarTunggu = {
                         </td>` +
                     `<td>${d.nourut}</td>` +
                     `<td>${d.norm}</td>` +
-                    `<td>${d.noktp}</td>` +
+                    `<td>${nik}</td>` +
                     `<td>${d.kelompok}</td>` +
                     `<td>${d.noasuransi}</td>` +
                     `<td>${d.nama}</td>` +
@@ -67,6 +73,12 @@ const DaftarTunggu = {
 
             o.selesai.forEach(d => {
                 let statSelesai = `<label class='label label-primary' style="font-size: 11px;">Belum Selesai</label>`
+                const noktp = d.noktp.split("")
+                const nik = noktp.reduce((r, a, i) => {
+                    if (i < 6 ||i === 15) r += a
+                    else r += '*'
+                    return r
+                }, "")
                 strSelesai += `<tr>` +
                     `<td class='row small-spacing'>
                             <div class='btn-group btn-group-xs'>
@@ -76,13 +88,14 @@ const DaftarTunggu = {
                         </td>` +
                     `<td>${d.nourut}</td>` +
                     `<td>${d.norm}</td>` +
-                    `<td>${d.noktp}</td>` +
+                    `<td>${nik}</td>` +
                     `<td>${d.kelompok}</td>` +
                     `<td>${d.noasuransi}</td>` +
                     `<td>${d.nama}</td>` +
                     `<td>${d.jeniskel}</td>` +
                     `<td>${d.kelurahan}</td>` +
                     `<td>${d.kunj}</td>` +
+                    `<td>${d.tujuan}</td>` +
                     `<td>${statSelesai}</td>` +
                     `</tr>`
             })

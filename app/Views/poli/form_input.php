@@ -1,8 +1,3 @@
-<h4 class="box-title">Form Input Poli</h4>
-<hr class="garis-bawah">
-
-<?= $this->include('biodata/index') ?>
-
 <hr class="garisBawah">
 <button id="bRiwayat" class="btn btn-xs btn-block btn-warning" onclick="getRiwayat('');">RIWAYAT</button>
 <hr class="garisBawah">

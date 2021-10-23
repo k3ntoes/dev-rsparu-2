@@ -70,6 +70,7 @@
                         <th>Desa</th>
                         <th>Kunjungan</th>
                         <th>Tujuan</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>

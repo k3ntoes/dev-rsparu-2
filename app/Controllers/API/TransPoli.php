@@ -2,6 +2,7 @@
 
 namespace App\Controllers\API;
 
+use App\Models\API\KunjunganModel;
 use App\Models\API\TransPetugasModel;
 use App\Models\API\TransPoliModel;
 use CodeIgniter\API\ResponseTrait;
@@ -16,6 +17,7 @@ class TransPoli extends ResourceController
 	function __construct()
 	{
 		helper('cusresponse');
+		$this->kunj = new KunjunganModel();
 		$this->transPetugas = new TransPetugasModel();
 	}
 	/**
@@ -60,6 +62,7 @@ class TransPoli extends ResourceController
 		$body = json_decode($this->request->getBody());
 		$save = $this->model->save($body);
 		if (!$save) return $this->respond(res400(['message' => 'ada yang salah', 'debug' => $save]));
+		$this->kunj->save($body);
 		$this->transPetugas->save($body);
 		return $this->respond(res201(['message' => 'Data berhasil disimpan', 'data' => $save]));
 	}

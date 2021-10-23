@@ -58,7 +58,11 @@ const Module = {
             await DaftarTunggu.action.showList('Tensi', $('#tgl').val(), 2)
             DaftarTunggu.setData.data_table()
         },
-        setModal: notrans => $('#notrans-pindah').val(notrans),
+        setModal: notrans => {
+            $('#notrans-pindah').val(notrans)
+            NProgress.done()
+            return
+        },
         setForm: (kunj, dataPoli, t_petugas) => {
             $('#norm').val(kunj.norm)
             $('#norm').attr('readonly', 'readonly')
@@ -125,6 +129,11 @@ Module.init()
 
 
 //Button Event
+$('#cariDaftarTunggu').on('click', async () => {
+    await DaftarTunggu.action.showList('Tensi', $('#tgl').val(), 2)
+    DaftarTunggu.setData.data_table()
+})
+
 $('.nav-tabs').on('click', 'li', e => {
     setTimeout(DaftarTunggu.setData.data_table, 100)
 })
@@ -150,3 +159,4 @@ $('#frmInputPoli').on('submit', e => {
     if (!e.isDefaultPrevented()) Module.action.simpan()
     return false
 })
+

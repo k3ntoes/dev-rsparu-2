@@ -18,7 +18,8 @@ class Kecamatan extends ResourceController
 	 */
 	public function index()
 	{
-		//
+		$result = $this->model->findAll();
+		return $this->respond(res200(['data' => $result]));
 	}
 
 	/**
