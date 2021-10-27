@@ -33,10 +33,10 @@
 
 <!-- View JS -->
 <?php $this->section('view_js') ?>
-<?php if (intval(user()->id) == 2) : ?>
-    <script type="module" src="/assets/custom/js/poli/poli_umum.js"></script>
-<?php else : ?>
+<?php if (user()->username == 'politb') : ?>
     <script type="module" src="/assets/custom/js/poli/poli_tb.js"></script>
+<?php else : ?>
+    <script type="module" src="/assets/custom/js/poli/poli_umum.js"></script>
 <?php endif ?>
 <?php $this->endSection() ?>
 <!-- View JS -->

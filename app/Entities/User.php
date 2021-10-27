@@ -258,6 +258,24 @@ class User extends MythUser
         return $this->roles;
     }
 
+    public function getCurrentRoles()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException('Users must be created before getting roles.');
+        }
+
+        if (empty($this->roles)) {
+            $this->roles = $this->getRoles();
+        }
+
+        $curRole = "";
+        foreach ($this->roles as $k => $v) {
+            $curRole = $v;
+        }
+
+        return $curRole;
+    }
+
     /**
      * Warns the developer it won't work, so they don't spend
      * hours tracking stuff down.

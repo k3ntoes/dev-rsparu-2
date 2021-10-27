@@ -43,8 +43,9 @@ const DaftarTunggu = {
                 const nik = d.noktp
                     .split("")
                     .reduce((r, a, i) => {
-                        if (i < 6 || r === 15) r += a
+                        if (i < 6 || i >= 14) r += a
                         else r += '*'
+                        return r
                     }, "")
                 strTunggu += `<tr>` +
                     `<td class='row small-spacing'>
@@ -75,7 +76,7 @@ const DaftarTunggu = {
                 let statSelesai = `<label class='label label-primary' style="font-size: 11px;">Belum Selesai</label>`
                 const noktp = d.noktp.split("")
                 const nik = noktp.reduce((r, a, i) => {
-                    if (i < 6 ||i === 15) r += a
+                    if (i < 6 || i >= 14) r += a
                     else r += '*'
                     return r
                 }, "")

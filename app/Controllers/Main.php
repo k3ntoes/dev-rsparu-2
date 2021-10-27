@@ -23,6 +23,7 @@ class Main extends ResourceController
 			return redirect('login');
 		}
 		return view('template/dashboard');
+		// print_r(user()->getRoles());
 	}
 
 	/**

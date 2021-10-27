@@ -24,7 +24,7 @@ const petugas = {
 
         if (group === "loket") return $('#p_loket').append(strLoket)
         if (group === "tensi") return $('#p_admin_tensi, #p_perawat_tensi').append(strPerawat)
-        if (group === "poli") {
+        if (group === "poli" || group === "poli tb") {
             $('#p_admin_poli, #p_admin_poli_konsul').append(strPerawat)
             $('#p_dokter_poli, #p_dokter_poli_konsul').append(strDokter)
             return
