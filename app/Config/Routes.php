@@ -85,6 +85,12 @@ $routes->group('API/DaftarTunggu', function ($routes) {
 $routes->resource('API/TransPoli');
 // End API
 
+// CETAK
+$routes->group('Cetak', function ($routes) {
+    $routes->get('RM/(:num)', 'Cetak::RM/$1');
+});
+// End CETAK
+
 //Report
 $routes->resource('Report/Kunjungan');
 //End Report

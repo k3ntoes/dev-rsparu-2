@@ -91,6 +91,51 @@ class PasienModel extends Model
 		return $result;
 	}
 
+	public function cari_bio_by_rm($norm = null)
+	{
+		if ($norm == null) return null;
+		$inorm = intval($norm);
+		$res = $this->builder()
+			->select(
+				'm_pasien.inorm,
+				m_pasien.norm,
+				m_pasien.rmlama,
+				m_pasien.tgldaftar,
+				m_pasien.jamdaftar,
+				m_pasien.noasuransi,
+				m_pasien.noktp,
+				m_pasien.nama,
+				m_pasien.alamat,
+				m_pasien.rtrw,
+				m_pasien.jeniskel,
+				m_pasien.tmptlahir,
+				m_pasien.tgllahir,
+				m_pasien.nohp,
+				m_pasien.statKawin,
+				m_pasien.pekerjaan,
+				m_pasien.pjwb,
+				m_pasien.ibuKandung,
+				m_pasien.jctkkartu,
+				m_pasien.goldarah,
+				m_kelompok.kelompok,
+				m_provinsi.provinsi,
+				m_kabupaten.kabupaten,
+				m_kecamatan.kecamatan,
+				m_kelurahan.kelurahan,
+				m_agama.agama,
+				m_pendidikan.pendidikan'
+			)
+			->join('m_kelompok','m_pasien.kkelompok = m_kelompok.kkelompok','INNER')
+			->join('m_provinsi','m_pasien.kprovinsi = m_provinsi.kdProv','INNER')
+			->join('m_kabupaten','m_pasien.kkabupaten = m_kabupaten.kdKab','INNER')
+			->join('m_kecamatan','m_pasien.kkecamatan = m_kecamatan.kdKec','INNER')
+			->join('m_kelurahan','m_pasien.kkelurahan = m_kelurahan.kdKel','INNER')
+			->join('m_agama','m_pasien.kdAgama = m_agama.kdAgama','INNER')
+			->join('m_pendidikan','m_pasien.kdPendidikan = m_pendidikan.kdPend','INNER')
+			->where('inorm', $inorm)->get()->getFirstRow();
+		return $res;
+	}
+
 	public function cekExist(object $req)
 	{
 		$exist = false;
